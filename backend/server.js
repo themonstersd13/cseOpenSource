@@ -3,11 +3,14 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const cors = require("cors");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 const app = express();
 
 app.use(fileUpload());
 app.use(cors());
+app.use(bodyParser.json());
 mongoose.connect("mongodb://localhost:27017/miDomains");
+
 const db = mongoose.connection;
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +26,7 @@ app.post('/upload', (req, res) => {
 
   const currentId = req.body.currentId;
   const file = req.files.file;
-  const fileName=`${Date.now()}${path.extname(file.name)}`;
+  const fileName=`${req.body.filename}${path.extname(file.name)}`;
   // Set destination path dynamically
   const uploadPath = `E:/PROGRAMING/webD/openSourceWceCse/frontend/public/data/${currentId}/${fileName}`;
 
@@ -31,13 +34,13 @@ app.post('/upload', (req, res) => {
   file.mv(uploadPath, (err) => {
     if (err) {
       return res.status(500).json({ error: err.message });
+      
     }
-    let dataVector = JSON.parse(req.body.dataVector);
-    dataVector.push(fileName);
-
     db.collection("DomainData").findOne({ idName: currentId })
-      .then((obs) => {
-        if (obs && obs.arr) {
+    .then((obs) => {
+      let dataVector=obs.arr;
+      dataVector.push(fileName);
+      if (obs && obs.arr) {
           db.collection("DomainData").updateOne(
             { idName: currentId },
             { $set: { arr: dataVector } }
@@ -68,13 +71,15 @@ app.post('/upload', (req, res) => {
 
 app.post("/passdata", (req, res) => {
 const {currentId}=req.body;
-console.log(currentId);
+console.log("id",currentId);
 db.collection("DomainData").findOne({idName:currentId})
 
 .then((obs)=>{
+  console.log("obs",obs)
     if (obs && obs.arr) {
         console.log('Result:', obs.arr);
-        res.json(obs.arr);
+        let dataVector=obs.arr;
+        res.json({arr:dataVector});
       } else {
         console.log('No data found');
         res.status(404).json({ error: 'No data found' });

@@ -10,7 +10,6 @@ function NormalSc(props) {
             domain={props.domainN}
             CheakDomain={props.CheakDomain}
             image={domain.images[index]}
-            handleRedirect={props.handleRedirect}
             id={id}
             skillsV={skillsV}
             Name={domain.Name[index]}
