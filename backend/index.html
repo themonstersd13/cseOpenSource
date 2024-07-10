@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Upload</title>
+</head>
+<body>
+  <h1>File Upload Form</h1>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      const fileField = document.querySelector('input[type="file"]');
+
+      formData.append('file', fileField.files[0]);
+      formData.append("currentId","7CM106");
+      formData.append('dataVector', JSON.stringify(["1720521626709.pdf"]));
+
+
+
+      try {
+        const response = await fetch('http://localhost:3500/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        console.log(result.currentId);
+        console.log(result.filename);
+        console.log(result.dataVector);
+        alert("done");
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        alert("undone");
+      }
+    });
+  </script>
+</body>
+</html>

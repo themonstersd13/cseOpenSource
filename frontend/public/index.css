@@ -1,0 +1,97 @@
+*{
+  margin:0;
+  padding: 0;
+}
+body{
+  background-color: #F5F5F7;
+}
+font{
+  color:black;
+}
+.outeronesc1{
+  overflow-y: hidden;
+  overflow-x:scroll;
+  scrollbar-color: #F5F5F7 #F5F5F7;
+  width: auto;
+  height:300px;
+  }
+  .scbar1cont{
+  width: auto;
+   overflow-y: hidden;
+   overflow-x:scroll; 
+   white-space: nowrap;
+  scrollbar-track-color:#F5F5F7;
+  scrollbar-color: #F5F5F7; 
+  border-radius: 15px;
+}
+.innerElements {
+  height: 15rem;
+  width: 250px;
+  display: inline-block;
+  margin-left: 20px;
+  padding: 18px;
+  background-color: rgb(255, 255, 255);
+  border:1px solid rgba(0,0,0,0.2);
+  border-radius: 10px;
+  vertical-align: top; 
+}
+.innerElements:hover{
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.images {
+  width: 250px;
+  height: 200px;
+}
+
+.innertitle {
+  width: 100%;
+  font-weight: 700;
+  font-size: 1.1em;
+  word-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+  overflow-wrap: break-word;
+  padding: 0 5px; 
+  white-space: normal;
+}
+
+.domainTitle{
+  padding:0px 0px 10px 2%;
+  font-size: 1.4em;
+  font-weight: 900px;
+}
+.ToggleContainer{
+  height:400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toggleOptions{
+  background-color: white;
+  padding: 80px;
+  border:2px solid white;
+  border-radius: 15px;
+  display: flex;
+  margin-left: 7px;
+  border:1px solid rgba(0,0,0,0.2);
+}
+.domaintext{
+  padding: 10px;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.toggleBtn{
+  margin: 10px 13px 0px 13px;
+  border:1px double black;
+}
+.bottomTagline{
+  margin-top: 10px;
+  margin-left: 75px;
+  font-size: 1.3em;
+}
+.testDiv{
+  background-color: red;
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+}
