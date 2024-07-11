@@ -19,7 +19,7 @@ const routes = [
     errorElement: <NotFound />,
   },
   {
-    path: '/:id',
+    path: '/notes/:currentId',
     element: <TestDiv />,
   }
 ];

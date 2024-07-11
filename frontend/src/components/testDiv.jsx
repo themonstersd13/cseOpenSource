@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
 function TestDiv() {
   const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
-  const { state } = location;
-  const { currentId} = state;
   const [dataVector, setdataVector] = useState([]);
+  const [failedText,setfailedText] = useState("Loading...");
+  const {currentId} = useParams();
   const eleMents = dataVector.map((ele, index) => (
     <a 
       key={index}
-      href={`${process.env.PUBLIC_URL}/data/${currentId}/${ele}`} 
+      href={`${process.env.PUBLIC_URL}/notes/${currentId}/${ele}`} 
       type="application/pdf">
       <div className='testDiv'>
       <div>{ele.replace(/\.pdf$/, '')}</div>
@@ -29,14 +28,14 @@ function TestDiv() {
       })
       .catch(error => {
         setdataVector([]);
+        setfailedText("500");
         console.error('There was an error!', error);
-        setIsLoading(false); 
       });
   }, [currentId]);
 
   return (
     <div>
-      {isLoading ? 'loading...' : eleMents}
+      {isLoading ?<h1 align="center"> {failedText} </h1>: eleMents}
     </div>
   );
 }

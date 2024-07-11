@@ -1,13 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../css/index.css';
 const ScBarComponent = (props) => {
     const skillsV = props.skillsV;
     const navigate = useNavigate();
     const handleClick = (val) => {
         const newId = val.target.parentElement.id;
-        const state = { currentId:newId };
-        navigate(`/${newId}`, { state });
+        navigate(`/notes/${newId}`);
     };
 
     let url = '';

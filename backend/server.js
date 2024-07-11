@@ -9,6 +9,7 @@ const app = express();
 app.use(fileUpload());
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 mongoose.connect("mongodb://localhost:27017/miDomains");
 
 const db = mongoose.connection;
@@ -43,11 +44,57 @@ app.post('/login',(req,res)=>{
   }
   db.collection('users').findOne(data)
   .then((result)=>{
-    res.status(200).json({message:"successfull",arr:result.arr});
+    res.status(200).json({message:"successfull",data:result});
   })
   .catch((err)=>{
     console.log(err);
     res.status(404).json({message:"invalid"});
+  })
+})
+
+app.post('/load-my-notes',(req,res)=>{
+  const {username,password} = req.body;
+  const data={
+    username:username,
+    password:password
+  }
+  db.collection('users').findOne(data)
+  .then((result)=>{
+    res.status(200).json({arr:result.arr,message:"retrived"})
+  })
+  .catch((err)=>{
+    console.log(err);
+    res.status(500).json({message:"error occured"})
+  })
+})
+
+app.post('/my-notes-update-arr',(req,res)=>{
+  const {username,password,currentId,filename} = req.body;
+  const data={
+    username:username,
+    password:password
+  }
+  db.collection('users').findOne(data)
+  .then((result)=>{
+    let dataVector=result.arr;
+    console.log("data:",result)
+    dataVector.push(`${currentId}/${filename}`);
+    console.log(dataVector)
+    db.collection('users').updateOne(
+      data,
+      { $set: { arr: dataVector } }
+    )
+    .then(()=>{
+      console.log(dataVector);
+      res.status(200).json({message:"updated",arr:dataVector});
+    })
+    .catch((err)=>{
+      console.log(err)
+      res.status(500).json({error:err});
+    })
+  })
+  .catch((err)=>{
+    res.status(500).json({error:err});
   })
 })
 
@@ -97,9 +144,6 @@ app.post('/upload', (req, res) => {
   });
   
 });
-
-
-
 
 app.post("/passdata", (req, res) => {
 const {currentId}=req.body;
