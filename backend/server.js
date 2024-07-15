@@ -157,7 +157,9 @@ app.post("/passdata", (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     });
 });
-
+app.get("/",(req,res)=>{
+  res.send("working fine");
+})
 const PORT = process.env.PORT || 3500;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
