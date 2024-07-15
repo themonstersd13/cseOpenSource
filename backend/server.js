@@ -4,6 +4,7 @@ const path = require('path');
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const { put } = require('@vercel/blob');
 require('dotenv').config();
 const app = express();
 
@@ -104,63 +105,60 @@ app.post('/my-notes-update-arr',(req,res)=>{
   })
 })
 
-
-app.post('/upload', (req, res) => {
+app.post('/upload', async (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({ error: 'No file uploaded.' });
   }
 
   const currentId = req.body.currentId;
   const file = req.files.file;
-  const fileName=`${req.body.filename}${path.extname(file.name)}`;
-  
-  const uploadPath = `E:/PROGRAMING/webD/openSourceWceCse/frontend/public/notes/${currentId}/${fileName}`;
+  const fileName = `${req.body.filename}${path.extname(file.name)}`;
 
-  
-  file.mv(uploadPath, (err) => {
-    if (err) {
-      console.log("in storing")
-      return res.status(500).json({ error: err.message });
-      
-    }
+  try {
+    
+    const { url } = await put(fileName, file.data, { access: 'public' });
+
     db.collection("DomainData").findOne({ idName: currentId })
     .then((obs) => {
       if (obs && obs.arr) {
-        let dataVector=obs.arr;
-        dataVector.push(fileName);
-          db.collection("DomainData").updateOne(
-            { idName: currentId },
-            { $set: { arr: dataVector } }
-          )
-          .then(() => {
-            res.json({ currentId: currentId, fileName,dataVector });
-          })
-          .catch((err) => {
-            console.error('Database update failed', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-          });
-        } else {
-          let data={
-            idName:currentId,
-            arr:[fileName]
-          }
-          db.collection('DomainData').insertOne(data,(err)=>{
-            if (err) {
-              res.json({message:err});
-            }
-            console.log("done data successfully ");
-            res.json({message:"successful",currentId,fileName,dataVector:[fileName]});
-          })
-        }
-      })
-      .catch((err) => {
-        console.error('Database query failed', err);
-        res.status(500).json({ error: 'Internal Server Error' });
-      });
-  });
-  
-});
+        let dataVector = obs.arr;
+        dataVector.push(url); 
 
+        db.collection("DomainData").updateOne(
+          { idName: currentId },
+          { $set: { arr: dataVector } }
+        )
+        .then(() => {
+          res.json({ currentId: currentId, fileName, dataVector });
+        })
+        .catch((err) => {
+          console.error('Database update failed', err);
+          res.status(500).json({ error: 'Internal Server Error' });
+        });
+      } else {
+        let data = {
+          idName: currentId,
+          arr: [url] 
+        };
+
+        db.collection('DomainData').insertOne(data, (err) => {
+          if (err) {
+            res.json({ message: err });
+          }
+          console.log("done data successfully");
+          res.json({ message: "successful", currentId, fileName, dataVector: [url] });
+        });
+      }
+    })
+    .catch((err) => {
+      console.error('Database query failed', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
+  } catch (err) {
+    console.error('File upload failed', err);
+    res.status(500).json({ error: 'File upload failed' });
+  }
+});
 app.post("/passdata", (req, res) => {
 const {currentId}=req.body;
 console.log("id",currentId);

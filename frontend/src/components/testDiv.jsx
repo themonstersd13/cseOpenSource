@@ -10,7 +10,7 @@ function TestDiv() {
   const eleMents = dataVector.map((ele, index) => (
     <a 
       key={index}
-      href={`${process.env.PUBLIC_URL}/notes/${currentId}/${ele}`} 
+      href={ele} 
       type="application/pdf">
       <div className='testDiv'>
       <div>{ele.replace(/\.pdf$/, '')}</div>
@@ -20,8 +20,7 @@ function TestDiv() {
 
   useEffect(() => {
     console.log(currentId)
-    const url = 'http://localhost:3500/passdata';
-    // const  url=`http://192.168.29.163:3500/passdata`;
+    const url = 'https://cse-open-source.vercel.app/passdata';
     axios.post(url, { currentId })
       .then(response => {
         setdataVector(response.data.arr);

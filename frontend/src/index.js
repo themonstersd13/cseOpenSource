@@ -4,7 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './components/app';
 import Home from './components/Home';
 import NotFound from './components/NotFound';
-import TestDiv from './components/testDiv'
+import TestDiv from './components/testDiv';
+import FileUpload from './components/testFileUpload';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -21,6 +22,10 @@ const routes = [
   {
     path: '/notes/:currentId',
     element: <TestDiv />,
+  },
+  {
+    path: '/test-file-upload',
+    element: <FileUpload />
   }
 ];
 
