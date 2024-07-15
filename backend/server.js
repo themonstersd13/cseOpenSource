@@ -4,14 +4,15 @@ const path = require('path');
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const app = express();
 
 app.use(fileUpload());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend/build')));
-mongoose.connect("mongodb://localhost:27017/miDomains");
-
+// mongoose.connect(process.env.MONGO_URLLocal);
+mongoose.connect(process.env.MONGO_URL);
 const db = mongoose.connection;
 
 app.use(express.urlencoded({ extended: true }));
@@ -44,7 +45,12 @@ app.post('/login',(req,res)=>{
   }
   db.collection('users').findOne(data)
   .then((result)=>{
+    if(result.password && result.username){
     res.status(200).json({message:"successfull",data:result});
+    }
+    else{
+      res.status(404).json({message:"invalid"});  
+    }
   })
   .catch((err)=>{
     console.log(err);
@@ -108,19 +114,20 @@ app.post('/upload', (req, res) => {
   const file = req.files.file;
   const fileName=`${req.body.filename}${path.extname(file.name)}`;
   
-  const uploadPath = `E:/PROGRAMING/webD/openSourceWceCse/frontend/public/data/${currentId}/${fileName}`;
+  const uploadPath = `E:/PROGRAMING/webD/openSourceWceCse/frontend/public/notes/${currentId}/${fileName}`;
 
   
   file.mv(uploadPath, (err) => {
     if (err) {
+      console.log("in storing")
       return res.status(500).json({ error: err.message });
       
     }
     db.collection("DomainData").findOne({ idName: currentId })
     .then((obs) => {
-      let dataVector=obs.arr;
-      dataVector.push(fileName);
       if (obs && obs.arr) {
+        let dataVector=obs.arr;
+        dataVector.push(fileName);
           db.collection("DomainData").updateOne(
             { idName: currentId },
             { $set: { arr: dataVector } }
@@ -133,8 +140,17 @@ app.post('/upload', (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
           });
         } else {
-          console.log('No data found');
-          res.status(404).json({ error: 'No data found' });
+          let data={
+            idName:currentId,
+            arr:[fileName]
+          }
+          db.collection('DomainData').insertOne(data,(err)=>{
+            if (err) {
+              res.json({message:err});
+            }
+            console.log("done data successfully ");
+            res.json({message:"successful",currentId,fileName,dataVector:[fileName]});
+          })
         }
       })
       .catch((err) => {
@@ -157,8 +173,17 @@ db.collection("DomainData").findOne({idName:currentId})
         let dataVector=obs.arr;
         res.json({arr:dataVector});
       } else {
-        console.log('No data found');
-        res.status(404).json({ error: 'No data found' });
+          let data={
+            idName:currentId,
+            arr:[]
+          }
+          db.collection("DomainData").insertOne(data, (err, collection) => {
+          if (err) {
+            res.json({message:err});
+          }
+          console.log("done data successfully ");
+          res.json({message:"successful",arr:[]});
+        });
       }
     })
     .catch((err) => {
@@ -167,6 +192,6 @@ db.collection("DomainData").findOne({idName:currentId})
     });
 })
 
-  app.listen(3500, () => {
-    console.log('Server is running on port 3500');
-  });
+app.listen(3500||process.env.PORT, () => {
+  console.log(`Server is running on port 3500`);
+});

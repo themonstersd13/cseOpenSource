@@ -21,6 +21,7 @@ function TestDiv() {
   useEffect(() => {
     console.log(currentId)
     const url = 'http://localhost:3500/passdata';
+    // const  url=`http://192.168.29.163:3500/passdata`;
     axios.post(url, { currentId })
       .then(response => {
         setdataVector(response.data.arr);
