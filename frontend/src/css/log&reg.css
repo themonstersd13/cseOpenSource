@@ -1,0 +1,62 @@
+    .loginRegContainer {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f7;
+            margin: 0;
+        }
+        .container {
+            width: 350px;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #F16E00;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e65c00;
+        }
+        .toggle-button {
+            background-color: transparent;
+            color: #F16E00;
+            border: 2px solid #F16E00;
+            margin-top: 10px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .toggle-button:hover {
+            background-color: #F16E00;
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }

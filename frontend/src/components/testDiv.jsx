@@ -21,8 +21,8 @@ function TestDiv() {
 
   useEffect(() => {
     console.log(currentId)
-    // const url = 'https://cse-open-source.vercel.app/passdata';
-    const url=`http://localhost:3500/passdata`;
+    const url = 'https://cse-open-source.vercel.app/passdata';
+    // const url=`http://localhost:3500/passdata`;
     axios.post(url, { currentId })
       .then(response => {
         console.log(response.data);

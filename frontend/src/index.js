@@ -6,6 +6,7 @@ import Home from './components/Home';
 import NotFound from './components/NotFound';
 import TestDiv from './components/testDiv';
 import FileUpload from './components/testFileUpload';
+import AuthForm from './components/logReg';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/test-file-upload',
     element: <FileUpload />
+  },
+  {
+    path: '/authentication',
+    element: <AuthForm />
   }
 ];
 

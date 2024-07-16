@@ -14,12 +14,12 @@ font{
   scrollbar-color: #F5F5F7 #F5F5F7;
   width: auto;
   height:300px;
-  }
-  .scbar1cont{
+}
+.scbar1cont{
   width: auto;
-   overflow-y: hidden;
-   overflow-x:scroll; 
-   white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x:scroll; 
+  white-space: nowrap;
   scrollbar-track-color:#F5F5F7;
   scrollbar-color: #F5F5F7; 
   border-radius: 15px;
@@ -34,6 +34,9 @@ font{
   border:1px solid rgba(0,0,0,0.2);
   border-radius: 10px;
   vertical-align: top; 
+  transition: all 1s;
+  
+  opacity: 1;
 }
 .innerElements:hover{
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -95,3 +98,8 @@ font{
   width: 100px;
   margin: 20px;
 }
+.hidden {
+  opacity: 0;
+  transform: translate(-10%);
+}
+
