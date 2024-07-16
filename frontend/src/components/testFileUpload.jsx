@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const FileUpload = () => {
   const [file, setFile] = useState(null);
   const [currentId] = useState("7MA101");
-  const [filename] = useState("module 1");
+  const [filename] = useState("module 2");
   const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileData, setUploadedFileData] = useState(null);
 

@@ -23,11 +23,14 @@ db.once("open", () => console.log("successful"));
 
 
 app.post('/register',(req,res)=>{
-  const {username,password} =req.body;
+  const {username,password,prn} =req.body;
   const data={
     username:username,
     password:password,
-    arr:[]
+    prn:prn,
+    points:0,
+    arr:[],
+    titleArr:[]
   }
   db.collection("users").insertOne(data, (err, collection) => {
     if (err) {
@@ -67,7 +70,7 @@ app.post('/load-my-notes',(req,res)=>{
   }
   db.collection('users').findOne(data)
   .then((result)=>{
-    res.status(200).json({arr:result.arr,message:"retrived"})
+    res.status(200).json({arr:result.arr,message:"retrived",titleVector:result.titleArr})
   })
   .catch((err)=>{
     console.log(err);
@@ -76,7 +79,7 @@ app.post('/load-my-notes',(req,res)=>{
 })
 
 app.post('/my-notes-update-arr',(req,res)=>{
-  const {username,password,currentId,filename} = req.body;
+  const {username,password,filename,url} = req.body;
   const data={
     username:username,
     password:password
@@ -84,16 +87,18 @@ app.post('/my-notes-update-arr',(req,res)=>{
   db.collection('users').findOne(data)
   .then((result)=>{
     let dataVector=result.arr;
+    let titleVector=result.titleArr;
+    titleVector.push(filename);
     console.log("data:",result)
-    dataVector.push(`${currentId}/${filename}`);
+    dataVector.push(url);
     console.log(dataVector)
     db.collection('users').updateOne(
       data,
-      { $set: { arr: dataVector } }
+      { $set: { arr: dataVector ,titleArr: titleVector} }
     )
     .then(()=>{
       console.log(dataVector);
-      res.status(200).json({message:"updated",arr:dataVector});
+      res.status(200).json({message:"updated",arr:dataVector,titleVector});
     })
     .catch((err)=>{
       console.log(err)
@@ -120,16 +125,18 @@ app.post('/upload', async (req, res) => {
 
     db.collection("DomainData").findOne({ idName: currentId })
     .then((obs) => {
-      if (obs && obs.arr) {
+      if (obs && obs.arr && obs.titleArr) {
         let dataVector = obs.arr;
+        let titleVector= obs.titleArr;
+        titleVector.push(fileName);
         dataVector.push(url); 
 
         db.collection("DomainData").updateOne(
           { idName: currentId },
-          { $set: { arr: dataVector } }
+          { $set: { arr: dataVector ,titleArr:titleVector} }
         )
         .then(() => {
-          res.json({ currentId: currentId, fileName, dataVector });
+          res.json({ currentId: currentId, fileName, dataVector, titleVector});
         })
         .catch((err) => {
           console.error('Database update failed', err);
@@ -138,7 +145,8 @@ app.post('/upload', async (req, res) => {
       } else {
         let data = {
           idName: currentId,
-          arr: [url] 
+          arr: [url],
+          titleArr:[fileName]
         };
 
         db.collection('DomainData').insertOne(data, (err) => {
@@ -146,7 +154,7 @@ app.post('/upload', async (req, res) => {
             res.json({ message: err });
           }
           console.log("done data successfully");
-          res.json({ message: "successful", currentId, fileName, dataVector: [url] });
+          res.json({ message: "successful", currentId, fileName, dataVector: [url] ,titleArr:[fileName]});
         });
       }
     })
@@ -166,21 +174,23 @@ db.collection("DomainData").findOne({idName:currentId})
 
 .then((obs)=>{
   console.log("obs",obs)
-    if (obs && obs.arr) {
+    if (obs && obs.arr && obs.titleArr) {
         console.log('Result:', obs.arr);
         let dataVector=obs.arr;
-        res.json({arr:dataVector});
+        let titleVector=obs.titleArr;
+        res.json({arr:dataVector,titleVector});
       } else {
           let data={
             idName:currentId,
-            arr:[]
+            arr:[],
+            titleArr:[]
           }
           db.collection("DomainData").insertOne(data, (err, collection) => {
           if (err) {
             res.json({message:err});
           }
           console.log("done data successfully ");
-          res.json({message:"successful",arr:[]});
+          res.json({message:"successful",arr:[],titleArr:[]});
         });
       }
     })
