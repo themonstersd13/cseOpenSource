@@ -7,6 +7,7 @@ import NotFound from './components/NotFound';
 import TestDiv from './components/testDiv';
 import FileUpload from './components/testFileUpload';
 import AuthForm from './components/logReg';
+import NavigationMenu from './components/navbar';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -14,9 +15,9 @@ const root = createRoot(container);
 const routes = [
   {
     path: '/',
-    element: <App />,
+    element:<div><NavigationMenu /> <App /></div>,
     children: [
-      { path: '/', element: <Home /> },
+      { path: '/', element: <div><NavigationMenu /> <Home /></div>},
     ],
     errorElement: <NotFound />,
   },
