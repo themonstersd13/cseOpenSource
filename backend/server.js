@@ -28,7 +28,6 @@ app.post('/register',(req,res)=>{
     username:username,
     password:password,
     prn:prn,
-    points:0,
     arr:[],
     titleArr:[]
   }
