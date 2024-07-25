@@ -44,8 +44,8 @@ font{
 .images {
   width: 250px;
   height: 200px;
+  align-items: center;
 }
-
 .innertitle {
   width: 100%;
   font-weight: 700;

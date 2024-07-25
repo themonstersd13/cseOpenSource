@@ -70,7 +70,6 @@ const ContributionPage = () => {
             console.error('There was an error uploading the file!', error);
         });
     };
-
     const addToMyNotes = (e) => {
         const currid = e.target.id;
         const url = dataVector[currid];
@@ -81,6 +80,7 @@ const ContributionPage = () => {
             console.log(response.data);
             setdataVector(response.data.arr);
             setTitleVector(response.data.titleVector);
+            window.location.reload();
           })
           .catch(error => {
             setdataVector([]);
@@ -118,7 +118,7 @@ const ContributionPage = () => {
     };
 
     const eleMents = dataVector.map((ele, index) => (
-        <div className='bigContCp' key={index}>
+        <div className='bigContCp'style={index===dataVector.length-1?{marginBottom:"100px"}:null} key={index}>
             <div className="box-container">
                 <div className="box">
                     <a href={ele} type="application/pdf">
@@ -159,7 +159,7 @@ const ContributionPage = () => {
                             </div>
                             <div className="form-field">
                                 <label htmlFor="filename">Enter Filename</label>
-                                <input type="text" id="filename" name="filename" value={formData.filename} onChange={handleInputChange} required />
+                                <input type="text" maxLength="16" id="filename" name="filename" value={formData.filename} onChange={handleInputChange} required />
                             </div>
                             <div className="form-field">
                                 <label htmlFor="file">Upload File:</label>
