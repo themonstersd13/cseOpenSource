@@ -198,6 +198,18 @@ db.collection("DomainData").findOne({idName:currentId})
       res.status(500).json({ error: 'Internal Server Error' });
     });
 })
+  
+app.post('/leaderboard',(req,res)=>{
+   db.collection('leaderboard').findOne({leaderboard:"learderboard"})
+   .then((data)=>{
+      res.json({arr:data.arrPrn,arr2:data.arrCoins});
+   })
+   .catch((err)=>{
+      res.json({message:"error"})
+   })
+  //  res.json({message:"done"})
+})
+
 app.get("/",(req,res)=>{
   res.send("working");
 })

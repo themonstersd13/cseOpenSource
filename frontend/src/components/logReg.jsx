@@ -25,11 +25,13 @@ const AuthForm = () => {
   };
 
   const handleLoginSuccess = (data) => {
-    localStorage.setItem('currentUser', JSON.stringify(data));
+    // localStorage.setItem('currentUser', JSON.stringify(data));
+    sessionStorage.setItem('currentUser', JSON.stringify(data));
   };
 
   const handleLoginFailure = () => {
-    localStorage.setItem('currentUser', '0');
+    // localStorage.setItem('currentUser', '0');
+    sessionStorage.setItem('currentUser', '0');
   };
 
   const handleSubmit = (e) => {
