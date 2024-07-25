@@ -26,7 +26,7 @@ const data={
             Name:["Compiler Design ","Design and Analysis of Algorithms ","Artificial Intelligence","Design and Analysis of Algorithms Laboratory ","Programming Laboratory III ","Mini-Project  I ","Humanities I-Project Management and Ethics ","Integrated/Employability skills I"]
         },
         sem6:{
-            images:["cc.jpg","ads.jpeg","ml.jpg","ads_lab.png","ml_lab.png","mp_2.png","sc.png","ios_lab.jpeg","cps.jpeg","entrship.jpg","es.jpg"],
+            images:["cc.jpg","ads.jpeg","ml.jpg","ads_lab.png","ml_lab.jpg","mp_2.png","sc.png","ios _lab.jpeg","cps.jpeg","entrship.jpg","es.jpg"],
             id:["6CS321","6CS322","6CS323","6CS371","6CS372","6CS342","6CS332","6CS381","6OE364","6HS306","6HS302"],
             Name:["Cloud Computing","Advanced Database System","Machine Learning","Advanced Database System Lab","Machine Learning Lab","Mini-Project-II","Soft Computing","iOS_Lab","Cyber Physical Systems","Humanities-1 Introduction to Entrepreneurship","	Integrated/ Employability Skills-2"]
         },

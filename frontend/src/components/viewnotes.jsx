@@ -5,10 +5,10 @@ import '../css/ContributionPage.css';
 
 const ContributionPage = () => {
     const [showForm, setShowForm] = useState(false);
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [dataVector, setdataVector] = useState([]);
     const [titleVector, setTitleVector] = useState([]);
-    // const [failedText, setfailedText] = useState("Loading...");
+    const [failedText, setfailedText] = useState("Loading...");
     const [formData, setFormData] = useState({
         name: '',
         prn: '',
@@ -16,6 +16,7 @@ const ContributionPage = () => {
         courseCode: '',
         file: null
     });
+    const [fileError, setFileError] = useState('');
     const { currentId } = useParams();
 
     const handleInputChange = (e) => {
@@ -27,14 +28,26 @@ const ContributionPage = () => {
     };
 
     const handleFileChange = (e) => {
-        setFormData(prevState => ({
-            ...prevState,
-            file: e.target.files[0]
-        }));
+        const file = e.target.files[0];
+        const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+
+        if (file && file.size > maxSize) {
+            setFileError('File size exceeds the 10MB limit.');
+        } else {
+            setFileError('');
+            setFormData(prevState => ({
+                ...prevState,
+                file: file
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (fileError) {
+            return;
+        }
+
         const url = 'https://cse-open-source.vercel.app/upload';
         // const url = `http://localhost:3500/upload`;
         const uploadData = new FormData();
@@ -57,25 +70,25 @@ const ContributionPage = () => {
             console.error('There was an error uploading the file!', error);
         });
     };
-    const addToMyNotes = (e) =>{
-        const currid=e.target.id;
-        const url=dataVector[currid];
-        const filename=titleVector[currid];
-        const {username,password}=JSON.parse(sessionStorage.getItem('currentUser'));
-        axios.post('https://cse-open-source.vercel.app/my-notes-update-arr',
-             { username,password,url,filename })
+
+    const addToMyNotes = (e) => {
+        const currid = e.target.id;
+        const url = dataVector[currid];
+        const filename = titleVector[currid];
+        const { username, password } = JSON.parse(sessionStorage.getItem('currentUser'));
+        axios.post('https://cse-open-source.vercel.app/my-notes-update-arr', { username, password, url, filename })
           .then(response => {
             console.log(response.data);
             setdataVector(response.data.arr);
             setTitleVector(response.data.titleVector);
-            // setIsLoading(false);
           })
           .catch(error => {
             setdataVector([]);
-            // setfailedText("500");
+            alert("failed to upload");
             console.error('There was an error!', error);
           });
-    }
+    };
+
     useEffect(() => {
         console.log(currentId);
         const url = 'https://cse-open-source.vercel.app/passdata';
@@ -85,11 +98,11 @@ const ContributionPage = () => {
             console.log(response.data);
             setdataVector(response.data.arr);
             setTitleVector(response.data.titleVector);
-            // setIsLoading(false);
+            setIsLoading(false);
           })
           .catch(error => {
             setdataVector([]);
-            // setfailedText("500");
+            setfailedText("500");
             console.error('There was an error!', error);
           });
       }, [currentId]);
@@ -117,12 +130,13 @@ const ContributionPage = () => {
                 </div>
             </div>
             <div className="buttons">
-                <button onClick={addToMyNotes} id={index}  className="button-77">ADD</button>
+                <button onClick={addToMyNotes} id={index} className="button-77">ADD</button>
             </div>
         </div>
     ));
 
     return (
+        <>{isLoading ?<h1 align="center"> {failedText} </h1>:
         <>
             <div className="bigCont">
                 {eleMents}
@@ -150,6 +164,7 @@ const ContributionPage = () => {
                             <div className="form-field">
                                 <label htmlFor="file">Upload File:</label>
                                 <input type="file" id="file" name="file" onChange={handleFileChange} />
+                                {fileError && <p className="error-message">{fileError}</p>}
                             </div>
                             <div className="form-buttons">
                                 <button className="button submit-btn" type="submit">Submit</button>
@@ -159,8 +174,8 @@ const ContributionPage = () => {
                     </div>
                 </>
             )}
-        </>
-    );
+        </>}
+        </>);
 };
 
 export default ContributionPage;
