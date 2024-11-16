@@ -8,7 +8,7 @@ import NavigationMenu from './components/navbar';
 import About from './components/about';
 import ContributionPage from './components/viewnotes';
 import Mynotes from './components/my-notes';
-
+ 
 const container = document.getElementById('root');
 const root = createRoot(container);
 
