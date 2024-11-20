@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const User = require('../models/User'); 
 
 exports.loadNotes = async (req, res) => {
@@ -24,7 +23,7 @@ exports.loadNotes = async (req, res) => {
 
 exports.updateNotes = async (req, res) => {
   const { username, password, filename, url } = req.body;
-  const data = { username };
+  const data = { username,password };
 
   try {
    
@@ -32,10 +31,6 @@ exports.updateNotes = async (req, res) => {
 
     if (result) {
     
-      const isPasswordValid = await bcrypt.compare(password, result.password);
-
-      if (isPasswordValid) {
-        
         let dataVector = result.arr;
         let titleVector = result.titleArr;
         titleVector.push(filename);
@@ -47,9 +42,7 @@ exports.updateNotes = async (req, res) => {
         );
 
         res.status(200).json({ message: "updated", arr: dataVector, titleVector });
-      } else {
-        res.status(401).json({ message: "Invalid credentials" });
-      }
+      
     } else {
       res.status(404).json({ message: "User not found" });
     }
