@@ -15,14 +15,17 @@ function NormalSc(props) {
             Name={domain.Name[index]}
         />
     ));
+
     return (
-        <div>
-            <div className='domainTitle'>{props.CheakDomain?"Semester "+props.domainN:skillsV[props.domainN]}</div>
-        <div className="outeronesc1">
-            <div className="scbar1cont">
-                {Elements}
+        <div >
+            <div className='p-0 px-2 py-4 text-2xl font-bold'>
+                {props.CheakDomain ? `Semester ${props.domainN}` : skillsV[props.domainN]}
             </div>
-        </div>
+            <div className="overflow-x-auto py-4 bg-transparent">
+                <div className="flex space-x-5">
+                    {Elements}
+                </div>
+            </div>
         </div>
     );
 }

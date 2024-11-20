@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/log&reg.css';
+// import '../css/log&reg.css';
 
 const AuthForm = () => {
   const navigate = useNavigate();
@@ -25,12 +25,10 @@ const AuthForm = () => {
   };
 
   const handleLoginSuccess = (data) => {
-    // localStorage.setItem('currentUser', JSON.stringify(data));
     sessionStorage.setItem('currentUser', JSON.stringify(data));
   };
 
   const handleLoginFailure = () => {
-    // localStorage.setItem('currentUser', '0');
     sessionStorage.setItem('currentUser', '0');
   };
 
@@ -87,97 +85,85 @@ const AuthForm = () => {
   };
 
   return (
-    <div className='loginRegContainer'>
-      <title>Login and Register</title>
-      <link rel="stylesheet" href="" />
-      
-      {isLogin ? (
-        <div className="container" id="login-container">
-          <h2>Login</h2>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="login-username">Username</label>
-            <input
-              type="text"
-              id="login-username"
-              name="username"
-              placeholder="Enter your Username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
-            <label htmlFor="login-password">Password</label>
-            <input
-              type="password"
-              id="login-password"
-              name="password"
-              placeholder="Enter your Password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-            <button type="submit">Login</button>
-          </form>
-          <button className="toggle-button" onClick={toggleForm}>{currentFormState}</button>
-        </div>
-      ) : (
-        <div className="container" id="register-container">
-          <h2>Register</h2>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="register-name">Name</label>
-            <input
-              type="text"
-              id="register-name"
-              name="name"
-              placeholder="Enter your Name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-            <label htmlFor="register-prn">PRN</label>
-            <input
-              type="text"
-              id="register-prn"
-              name="prn"
-              placeholder="Enter your PRN"
-              value={formData.prn}
-              onChange={handleInputChange}
-              required
-            />
-            <label htmlFor="register-branch">Branch</label>
-            <input
-              type="text"
-              id="register-branch"
-              name="branch"
-              placeholder="Enter your Branch"
-              value={formData.branch}
-              onChange={handleInputChange}
-              required
-            />
-            <label htmlFor="register-username">Username</label>
-            <input
-              type="text"
-              id="register-username"
-              name="username"
-              placeholder="Enter your Username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
-            <label htmlFor="register-password">Password</label>
-            <input
-              type="password"
-              id="register-password"
-              name="password"
-              placeholder="Enter your Password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-            <button type="submit">Register</button>
-          </form>
-          <button className="toggle-button" onClick={toggleForm}>{currentFormState}</button>
-        </div>
-      )}
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-l from-indigo-500 via-purple-600 to-pink-500">
+      <div className="w-96 p-8 bg-blue-100 border-2 border-blue-300 shadow-lg rounded-lg">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+          {isLogin ? 'Login' : 'Register'}
+        </h2>
+        <form onSubmit={handleSubmit}>
+          {!isLogin && (
+            <>
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="register-name">Name</label>
+              <input
+                type="text"
+                id="register-name"
+                name="name"
+                placeholder="Enter your Name"
+                className="w-full px-3 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded-lg focus:ring-green-400 focus:border-green-400 mb-4"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="register-prn">PRN</label>
+              <input
+                type="text"
+                id="register-prn"
+                name="prn"
+                placeholder="Enter your PRN"
+                className="w-full px-3 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded-lg focus:ring-green-400 focus:border-green-400 mb-4"
+                value={formData.prn}
+                onChange={handleInputChange}
+                required
+              />
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="register-branch">Branch</label>
+              <input
+                type="text"
+                id="register-branch"
+                name="branch"
+                placeholder="Enter your Branch"
+                className="w-full px-3 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded-lg focus:ring-green-400 focus:border-green-400 mb-4"
+                value={formData.branch}
+                onChange={handleInputChange}
+                required
+              />
+            </>
+          )}
+          <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your Username"
+            className="w-full px-3 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded-lg focus:ring-green-400 focus:border-green-400 mb-4"
+            value={formData.username}
+            onChange={handleInputChange}
+            required
+          />
+          <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your Password"
+            className="w-full px-3 py-2 bg-gray-100 text-gray-800 border border-gray-300 rounded-lg focus:ring-green-400 focus:border-green-400 mb-6"
+            value={formData.password}
+            onChange={handleInputChange}
+            required
+          />
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-pink-600 text-white font-medium rounded-lg hover:bg-pink-800 focus:outline-none focus:ring-2 focus:ring-pink-400"
+          >
+            {isLogin ? 'Login' : 'Register'}
+          </button>
+        </form>
+        <button
+          className="mt-4 w-full py-2 px-4 border border-pink-600 text-pink-600 font-medium rounded-lg hover:bg-pink-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-pink-400"
+          onClick={toggleForm}
+        >
+          {currentFormState}
+        </button>
+      </div>
     </div>
   );
 };

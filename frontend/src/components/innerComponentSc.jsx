@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/index.css';
 
@@ -16,47 +16,19 @@ const ScBarComponent = (props) => {
         ? (url = `${process.env.PUBLIC_URL}/images/academics/sem${props.domain}/`)
         : (url = `${process.env.PUBLIC_URL}/images/skills/${props.skillsV[props.domain]}/`);
 
-    useEffect(() => {
-        const targetDivs = ref.current;
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0
-        };
-
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    entry.target.classList.add('hidden');
-                } else {
-                    entry.target.classList.remove('hidden');
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        if (targetDivs) {
-            observer.observe(targetDivs);
-        }
-
-        return () => {
-            if (targetDivs) {
-                observer.unobserve(targetDivs);
-            }
-        };
-    }, []);
-
     return (
         <div
             onClick={handleClick}
-            className="innerElements"
+            className="flex-shrink-0 inline-block m-5 p-4 bg-blue-100 border-2 border-blue-300 rounded-lg cursor-pointer transition duration-300 hover:shadow-xl hover:border-blue-700"
             id={props.id}
             ref={ref}
+            style={{
+                width: '300px', 
+                height:'auto',
+            }}
         >
-            <img alt="" className="images" src={url + props.image}></img>
-            <p className="innertitle">{props.Name}</p>
+            <img alt="" className="w-96 h-48 object-cover rounded-md" src={url + props.image}></img>
+            <p className="font-semibold text-lg text-center break-words px-1 text-blue-800">{props.Name}</p>
         </div>
     );
 };

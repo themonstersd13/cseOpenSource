@@ -8,6 +8,9 @@ import NavigationMenu from './components/navbar';
 import About from './components/about';
 import ContributionPage from './components/viewnotes';
 import Mynotes from './components/my-notes';
+import ParticleBackground from './components/particle';
+import './index.css';
+
  
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -15,7 +18,7 @@ const root = createRoot(container);
 const routes = [
   {
     path: '/',
-    element:<NavigationMenu />,
+    element:<><NavigationMenu /><ParticleBackground /></>,
     children: [
       { 
         path: '/',
@@ -33,13 +36,14 @@ const routes = [
         path: '/my-notes',
         element: <Mynotes />,
       },
+      {
+        path: '/authentication',
+        element: <AuthForm />
+      }
     ],
     errorElement: <NotFound />,
-  },
-  {
-    path: '/authentication',
-    element: <AuthForm />
   }
+  
 ];
 
 const router = createBrowserRouter(routes);
