@@ -5,9 +5,6 @@ exports.uploadFile = async (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).json({ error: 'No file uploaded.' });
   }
-
-  console.log("agaya");
-
   const currentId = req.body.currentId;
   const file = req.files.file;
 
