@@ -1,0 +1,23 @@
+#bubbles {
+  position: fixed; /* Ensure it stays in place */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; /* Prevent bubbles from blocking interaction with other elements */
+  z-index: 1; /* Set a lower z-index for the bubbles */
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 0.8;
+  animation: float 5s ease-in-out infinite;
+  pointer-events: none; /* Prevent individual bubbles from blocking interaction */
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100vh); }
+}

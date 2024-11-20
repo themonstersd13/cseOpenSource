@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Bubbles from './particle';
 // import '../css/log&reg.css';
 
 const AuthForm = () => {
@@ -86,6 +87,7 @@ const AuthForm = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-l from-indigo-500 via-purple-600 to-pink-500">
+      <Bubbles />
       <div className="w-96 p-8 bg-blue-100 border-2 border-blue-300 shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
           {isLogin ? 'Login' : 'Register'}

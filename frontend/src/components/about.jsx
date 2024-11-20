@@ -1,8 +1,10 @@
 import React from 'react';
+import Bubbles from './particle';
 
 function About() {
   return (
     <div className="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-700 min-h-screen w-full flex items-center justify-center px-4 sm:px-6 md:px-8">
+      <Bubbles />
         <div className="bg-white border-2 border-blue-300 p-6 sm:p-8 rounded-lg w-full sm:w-[600px] md:w-[700px] lg:w-[800px] bg-opacity-90">
             <h1 className="text-center text-xl sm:text-2xl font-semibold text-blue-800 mb-4">About</h1>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">

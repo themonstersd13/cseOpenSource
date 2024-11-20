@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Bubbles from './particle';
 
 export default function Mynotes() {
     const [dataVector, setdataVector] = useState([]);
@@ -51,6 +52,7 @@ export default function Mynotes() {
 
     return (
         <div className="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-700 min-h-screen w-full ">
+            <Bubbles />
             <div className="p-6 rounded-lg  bg-opacity-90 max-w-screen-lg w-full text-white">
                 {isLoading ? (
                     <h1 className="text-center text-4xl font-bold">{failedText}</h1>

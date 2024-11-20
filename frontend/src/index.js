@@ -8,7 +8,7 @@ import NavigationMenu from './components/navbar';
 import About from './components/about';
 import ContributionPage from './components/viewnotes';
 import Mynotes from './components/my-notes';
-import ParticleBackground from './components/particle';
+// import Bubble from './components/particle';
 import './index.css';
 
  
@@ -18,7 +18,8 @@ const root = createRoot(container);
 const routes = [
   {
     path: '/',
-    element:<><NavigationMenu /><ParticleBackground /></>,
+    // element:<NavigationMenu />,
+    element:<NavigationMenu />,
     children: [
       { 
         path: '/',

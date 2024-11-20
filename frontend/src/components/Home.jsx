@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Domain from './academics';
 import Data from '../data/database';
 import Toggle from './toggle';
+import Bubbles from './particle';
 
 function Home() {
   const [checked, setChecked] = useState(true);
@@ -15,6 +16,7 @@ function Home() {
   return (
     <div className="bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-700 min-h-screen w-full flex items-center justify-center">
       <div className="p-6 rounded-lg shadow-lg bg-opacity-80 max-w-full w-full text-white">
+        <Bubbles />
         <Toggle checked={checked} handleDomain={handleChange} />
         <Domain CheakDomain={checked} domain={data} />
       </div>
