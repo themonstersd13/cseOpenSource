@@ -1,17 +1,16 @@
 const express = require('express');
-const path = require('path');
-const cors = require("cors");
+const cors = require('cors');
 const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
+const path = require('path');
 const connectDB = require('./config/db');
-
-// Routes
-const userRoutes = require('./routes/userRoutes');
+const fileUpload = require('express-fileupload');
+const authRoutes = require('./routes/userRoutes');
+const notesRoutes = require('./routes/notesRoutes');
+const fileUploadRoutes = require('./routes/fileUploadRoute');
+const domainDataRoutes = require('./routes/domainDataRoute');
+// const leaderboardRoutes = require('./routes/leaderboardRoutes');
 
 const app = express();
-require('dotenv').config();
-
-// Middleware
 app.use(fileUpload());
 app.use(cors());
 app.use(bodyParser.json());
@@ -20,17 +19,12 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Database connection
 connectDB();
+app.use('/', authRoutes);
+app.use('/', notesRoutes);
+app.use('/', fileUploadRoutes);
+app.use('/', domainDataRoutes);
+// app.use('/', leaderboardRoutes);
 
-// API Routes
-app.use('/', userRoutes);
-
-// Fallback Route
-app.get('/', (req, res) => {
-  res.send('Server is running');
-});
-
-// Start Server
-const PORT = process.env.PORT || 3500;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(3500 || process.env.PORT, () => {
+  console.log('Server is running on port 3500');
 });
