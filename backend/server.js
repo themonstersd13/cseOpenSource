@@ -10,11 +10,11 @@ const fileUploadRoutes = require('./routes/fileUploadRoute');
 const domainDataRoutes = require('./routes/domainDataRoute');
 const app = express();
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://notesadda.vercel.app'], // Allowed origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'], // Custom headers
-  exposedHeaders: ['Content-Disposition'], // Expose headers for file downloads
-  credentials: true, // Allow cookies and credentials
+  origin: ['http://localhost:3000', 'https://notesadda.vercel.app'], 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'], 
+  exposedHeaders: ['Content-Disposition'],
+  credentials: true, 
 };
 app.use(cors(corsOptions));
 
