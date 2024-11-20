@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const domainDataSchema = new mongoose.Schema(
   {
     idName: String,

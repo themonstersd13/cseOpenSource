@@ -2,15 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
-const app = express();
-app.use(cors());
 const connectDB = require('./config/db');
 const fileUpload = require('express-fileupload');
 const authRoutes = require('./routes/userRoutes');
 const notesRoutes = require('./routes/notesRoutes');
 const fileUploadRoutes = require('./routes/fileUploadRoute');
 const domainDataRoutes = require('./routes/domainDataRoute');
-// const leaderboardRoutes = require('./routes/leaderboardRoutes');
+const app = express();
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://notesadda.vercel.app'], // Allowed origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'], // Custom headers
+  exposedHeaders: ['Content-Disposition'], // Expose headers for file downloads
+  credentials: true, // Allow cookies and credentials
+};
+app.use(cors(corsOptions));
 
 app.use(fileUpload());
 app.use(bodyParser.json());
