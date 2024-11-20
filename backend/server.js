@@ -11,8 +11,8 @@ const domainDataRoutes = require('./routes/domainDataRoute');
 // const leaderboardRoutes = require('./routes/leaderboardRoutes');
 
 const app = express();
-app.use(fileUpload());
 app.use(cors());
+app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../frontend/build')));
