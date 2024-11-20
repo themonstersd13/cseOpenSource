@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 connectDB();
 
 // API Routes
-app.use('/api/users', userRoutes);
+app.use('/', userRoutes);
 
 // Fallback Route
 app.get('/', (req, res) => {

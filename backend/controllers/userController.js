@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 
 exports.register = async (req, res) => {
   const { username, password, prn } = req.body;
-
   try {
     
     const saltRounds = 10;
