@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+// app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 // Database connection
 connectDB();
@@ -30,7 +30,9 @@ app.use('/', notesRoutes);
 app.use('/', fileUploadRoutes);
 app.use('/', domainDataRoutes);
 // app.use('/', leaderboardRoutes);
-
+app.get('/',(req,res)=>{
+  res.send("td");
+})
 app.listen(3500 || process.env.PORT, () => {
   console.log('Server is running on port 3500');
 });
