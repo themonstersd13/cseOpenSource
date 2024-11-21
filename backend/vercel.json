@@ -11,5 +11,9 @@
             "src": "/(.*)",
             "dest": "server.js"
         }
-    ]
+    ],
+    "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://notesadda.vercel.app" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+      ]
 }
