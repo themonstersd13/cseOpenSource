@@ -28,7 +28,7 @@ const ContributionPage = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        const maxSize = 10 * 1024 * 1024;
+        const maxSize = 25 * 1024 * 1024;
 
         if (file && file.size > maxSize) {
             setFileError('File size exceeds the 10MB limit.');

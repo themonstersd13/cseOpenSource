@@ -3,7 +3,7 @@ import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 
 const NavigationMenu = () => {
   const [curruser, setuser] = useState('Login');
-  const [menuOpen, setMenuOpen] = useState(false); // State to manage mobile menu visibility
+  const [menuOpen, setMenuOpen] = useState(false); 
   const navigate = useNavigate();
   const location = useLocation();
 
