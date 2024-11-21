@@ -54,7 +54,7 @@ const ContributionPage = () => {
         uploadData.append('file', formData.file);
 
         axios.post(url, uploadData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
+            withCredentials: true,
         })
         .then(() => closeForm())
         .catch(error => console.error('Error uploading file!', error));

@@ -12,7 +12,7 @@ const app = express();
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://notesadda.vercel.app'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with'], 
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-requested-with', '*'], 
   exposedHeaders: ['Content-Disposition'],
   credentials: true, 
 };
