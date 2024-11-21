@@ -1,87 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes Adda - README</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px 10px;
-            text-align: center;
-        }
-        section {
-            padding: 20px;
-            margin: 10px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            color: #4CAF50;
-        }
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-        .file-structure {
-            font-family: monospace;
-            background: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 20px;
-        }
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-    <header>
+<div class="header">
+    <div class="title">
         <h1>Notes Adda</h1>
         <p>A MERN Stack Project for Sharing and Managing Study Materials</p>
-    </header>
-    
-    <section>
-        <h2>Introduction</h2>
-        <p>Notes Adda is a platform that simplifies sharing and accessing study materials. Built using the MERN stack, it provides an efficient and user-friendly system for academic collaboration.</p>
-    </section>
+    </div>
+</div>
 
-    <section>
-        <h2>Features</h2>
-        <ul>
-            <li>User-friendly interface for uploading and accessing study notes.</li>
-            <li>Advanced search functionality for quick retrieval.</li>
-            <li>Secure login and authentication system.</li>
-            <li>Supports multiple file formats for notes.</li>
-        </ul>
-    </section>
+<div class="introduction">
+    <h2>Introduction</h2>
+    <p>Notes Adda is a platform that simplifies sharing and accessing study materials. Built using the MERN stack, it provides an efficient and user-friendly system for academic collaboration.</p>
+</div>
 
-    <section>
-        <h2>Working</h2>
+<div class="features">
+    <h2>Features</h2>
+    <ul>
+        <li>User-friendly interface for uploading and accessing study notes.</li>
+        <li>Advanced search functionality for quick retrieval.</li>
+        <li>Secure login and authentication system.</li>
+        <li>Supports multiple file formats for notes.</li>
+    </ul>
+</div>
+
+<div class="working">
+    <h2>Working</h2>
+    <div class="frontend">
         <h3>Frontend</h3>
         <p>Developed using React, the frontend ensures a dynamic and responsive user experience.</p>
+    </div>
+    <div class="backend">
         <h3>Backend</h3>
         <p>The backend, built with Node.js and Express, handles server-side operations and API integration.</p>
+    </div>
+    <div class="database">
         <h3>Database</h3>
         <p>MongoDB is used to store user data and metadata of uploaded notes securely.</p>
+    </div>
+    <div class="workflow">
         <h3>Workflow</h3>
         <ul>
             <li><strong>User Authentication:</strong> Secure sign-up and login system.</li>
@@ -89,11 +42,12 @@
             <li><strong>Search Notes:</strong> Advanced search filters by title, tags, or categories.</li>
             <li><strong>Download Notes:</strong> Download resources easily.</li>
         </ul>
-    </section>
+    </div>
+</div>
 
-    <section>
-        <h2>File Structure</h2>
-        <pre class="file-structure">
+<div class="file-structure">
+    <h2>File Structure</h2>
+    <pre>
 cseOpenSource/
 ├── backend/
 │   ├── config/         # Configuration files
@@ -111,55 +65,52 @@ cseOpenSource/
 ├── README.md           # Project documentation
 ├── package.json        # Dependencies and scripts
 └── .gitignore          # Ignored files
-        </pre>
-    </section>
+    </pre>
+</div>
 
-    <section>
-        <h2>How to Run</h2>
-        <ol>
-            <li>Clone the repository:
-                <pre class="file-structure">git clone https://github.com/themonstersd13/cseOpenSource.git</pre>
-            </li>
-            <li>Install dependencies:
-                <ul>
-                    <li><strong>Backend:</strong>
-                        <pre class="file-structure">
+<div class="how-to-run">
+    <h2>How to Run</h2>
+    <ol>
+        <li>Clone the repository:
+            <pre>git clone https://github.com/themonstersd13/cseOpenSource.git</pre>
+        </li>
+        <li>Install dependencies:
+            <ul>
+                <li><strong>Backend:</strong>
+                    <pre>
 cd backend
 npm install
-                        </pre>
-                    </li>
-                    <li><strong>Frontend:</strong>
-                        <pre class="file-structure">
+                    </pre>
+                </li>
+                <li><strong>Frontend:</strong>
+                    <pre>
 cd frontend
 npm install
-                        </pre>
-                    </li>
-                </ul>
-            </li>
-            <li>Run the project:
-                <ul>
-                    <li><strong>Backend:</strong>
-                        <pre class="file-structure">npm start</pre>
-                    </li>
-                    <li><strong>Frontend:</strong>
-                        <pre class="file-structure">npm start</pre>
-                    </li>
-                </ul>
-            </li>
-            <li>Open the application at <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>.</li>
-        </ol>
-    </section>
+                    </pre>
+                </li>
+            </ul>
+        </li>
+        <li>Run the project:
+            <ul>
+                <li><strong>Backend:</strong>
+                    <pre>node ./server.js</pre>
+                </li>
+                <li><strong>Frontend:</strong>
+                    <pre>npm start</pre>
+                </li>
+            </ul>
+        </li>
+        <li>Open the application at <a href="http://notesadda.vercel.app/" target="_blank">http://notesadda.vercel.app/</a></li>
+    </ol>
+</div>
 
-    <section>
-        <h2>Contact</h2>
-        <p><strong>Author:</strong> Saurabh Shantaram Doiphode</p>
-        <p><strong>Email:</strong> <a href="mailto:saurabhdoiphode1335@gmail.com">saurabhdoiphode1335@gmail.com</a></p>
-        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saurabh-doiphode-7b170b289/" target="_blank">Saurabh Doiphode</a></p>
-    </section>
+<div class="contact">
+    <h2>Contact</h2>
+    <p><strong>Author:</strong> Saurabh Shantaram Doiphode</p>
+    <p><strong>Email:</strong> <a href="mailto:saurabhdoiphode1335@gmail.com">saurabhdoiphode1335@gmail.com</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/saurabh-doiphode-7b170b289/" target="_blank">Saurabh Doiphode</a></p>
+</div>
 
-    <footer>
+<div class="footer">
     <p>© 2024 All rights reserved by <a href="https://www.linkedin.com/in/saurabh-doiphode/" target="_blank">Saurabh Doiphode</a>.</p>
-</footer>
-
-</body>
-</html>
+</div>
