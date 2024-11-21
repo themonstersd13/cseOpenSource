@@ -17,6 +17,15 @@ const corsOptions = {
   credentials: true, 
 };
 app.use(cors(corsOptions));
+app.options('*', (req, res) => {
+  res.set({
+      'Access-Control-Allow-Origin': 'https://notesadda.vercel.app',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, x-requested-with',
+      'Access-Control-Allow-Credentials': 'true'
+  });
+  res.sendStatus(200);
+});
 
 app.use(fileUpload());
 app.use(bodyParser.json());
